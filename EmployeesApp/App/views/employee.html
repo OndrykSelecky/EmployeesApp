@@ -1,0 +1,101 @@
+﻿<section class="employee-page">
+    <div class="col-sm-6">
+        <h3>Personal information:</h3>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">First Name:</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" data-bind="value: employee().FirstName" />
+                </div>
+            </div>
+       
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Last Name:</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" data-bind="value: employee().LastName" />
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Address:</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" data-bind="value: employee().Address">
+                </div>
+            </div>
+       
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Date of Birth:</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" data-bind="value: employee().BirthDate">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Salary:</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <input type="number" class="form-control" min="0" data-bind="value: employee().Salary">
+                        <span class="input-group-addon">€</span>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-6">
+                    <button type="submit" class="btn btn-default" data-bind="click: updateEmployee, visible: !isNew()">Save</button>
+                </div>
+            </div>            
+        </form>     
+       
+    </div>
+
+    <div class="col-sm-6">
+        <h3>Positions:</h3>
+        <h4>Actual position:</h4>
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Position Name: </label>
+                <div class="col-sm-6">
+                    <select class="form-control" data-bind="options: positionTypes, optionsText: 'Name', value: selectedPosition"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">From:</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" data-bind="value: positions()[0].EndDate, attr: { min: positions()[0].EndDate }" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button type="submit" class="btn btn-default" data-bind="click: addPosition, visible: !isNew()">Save</button>
+                    <button type="submit" class="btn btn-default" data-bind="click: addEmployee, visible: isNew()">Save</button>
+                </div>
+            </div>     
+
+        </form>
+        <div data-bind="visible: positions().length > 1">
+            <h4>Position history:</h4>
+            <div class="col-sm-9 position-history " data-bind="visible: !isNew()">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: positions">
+                        <tr data-bind="if: $index() > 0">
+                            <td data-bind="text: PositionType"></td>
+                            <td data-bind="text: StartDate"></td>
+                            <td data-bind="text: EndDate"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
